@@ -1,12 +1,6 @@
 # секреты
 .env
 
-# выгруженные данные
-data/
-
-# клон Superset (запускаем в Codespace, в репозиторий он не нужен)
-superset/
-
 # мусор Python и Jupyter
 __pycache__/
 .ipynb_checkpoints/

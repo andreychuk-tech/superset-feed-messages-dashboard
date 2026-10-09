@@ -1,0 +1,27 @@
+name: superset-portfolio
+services:
+  superset:
+    image: apache/superset:latest-lean   # замени на закреплённую версию
+    container_name: superset_simple
+    ports:
+      - "8088:8088"
+    dns:
+      - 8.8.8.8
+    environment:
+      SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY:-demo-only-secret-key-change-me}
+      SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
+    user: "root"
+    volumes:
+      - ./superset_config.py:/app/pythonpath/superset_config.py:ro
+      - superset_home:/app/superset_home
+    command:
+      - bash
+      - -c
+      - |
+        superset db upgrade &&
+        (superset fab create-admin --username admin --firstname Admin --lastname User --email admin@example.com --password admin || true) &&
+        superset init &&
+        /usr/bin/run-server.sh
+
+volumes:
+  superset_home:
