@@ -63,7 +63,6 @@ FROM (
 GROUP BY dt, age_group, gender, city
 """
 
-
 os.makedirs("data", exist_ok=True)
 for name, q in [("dau_segments", q_segments), ("msg_activity", q_messages)]:
     df = ph.read_clickhouse(q, connection=connection)
