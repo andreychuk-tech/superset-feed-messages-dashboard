@@ -1,18 +1,18 @@
 import os
 import pandahouse as ph
-
-os.environ["CH_HOST"] = "http://clickhouse.lab.karpov.courses:8123"  # в Jupyter, только для сессии
-os.environ["CH_DATABASE"] = "simulator_20260820"
-os.environ["CH_USER"] = "student"
-
 from getpass import getpass
-os.environ["CH_PASSWORD"] = getpass("Password: ")
+
+def get_setting(name, secret=False):
+    value = os.environ.get(name)
+    if not value:
+        value = getpass(f"{name}: ") if secret else input(f"{name}: ")
+    return value
 
 connection = {
-    "host": os.environ["CH_HOST"],
-    "database": os.environ["CH_DATABASE"],   
-    "user": os.environ["CH_USER"],
-    "password": os.environ["CH_PASSWORD"],
+    "host": get_setting("CH_HOST"),         # например, http://<хост>:8123
+    "database": "simulator_20260820",
+    "user": get_setting("CH_USER"),
+    "password": get_setting("CH_PASSWORD", secret=True),
 }
 
 AGE_GROUP = """
