@@ -12,4 +12,10 @@ docker cp data/weekly_audience.csv superset_simple:/tmp/data/weekly_audience.csv
 
 docker cp scripts/load_csv_to_sqlite.py superset_simple:/tmp/load_csv_to_sqlite.py
 docker exec superset_simple /app/.venv/bin/python /tmp/load_csv_to_sqlite.py
-echo "Готово. Импортируй dashboard/dashboard_feed_messages.zip в Superset (admin / admin)."
+
+echo "Готово! Данные загружены в SQLite."
+echo "Следующий шаг: импортируй дашборды в Superset:"
+echo "  1. dashboard/dashboard_feed_messages.zip — лента и сообщения."
+echo "  2. dashboard/dashboard_retention.zip — Retention рекламных пользователей."
+echo "Открой Superset в браузере и войди под настроенной учётной записью."
+
